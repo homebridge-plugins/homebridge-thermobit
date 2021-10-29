@@ -24,7 +24,7 @@
       "refreshTime": {
         "title": "Refresh Interval",
         "type": "integer",
-        "description": "An interval (in seconds) in which your API devices will refresh with Govee. Must be 15 or more.",
+        "description": "An interval (in seconds) in which your device will refresh with Thermobit. Must be 15 or more.",
         "placeholder": 15,
         "minimum": 15
       },
@@ -61,12 +61,7 @@
       "title": "Optional Settings",
       "description": "Optional settings for the plugin, including refreshing and global logging settings.",
       "expandable": true,
-      "items": [
-        "refreshTime",
-        "disableDeviceLogging",
-        "debug",
-        "disablePlugin"
-      ]
+      "items": ["refreshTime", "debug", "disablePlugin"]
     }
   ]
 }

@@ -7,11 +7,6 @@ assignees: ''
 
 ---
 
-<!-- PLEASE READ BEFORE REQUESTING A NEW DEVICE
-   → The plugin currently supports ALL Govee models that the API permits.
-   → Unless there is an update to the API, no new models can be supported.
--->
-
 * **Please explain your feature request in a one or two sentences.**
 
 
@@ -20,7 +15,7 @@ assignees: ''
 
 
 
-* **Any particular Govee devices that this relates to?**
+* **Any particular Thermobit devices that this relates to?**
 
 
 

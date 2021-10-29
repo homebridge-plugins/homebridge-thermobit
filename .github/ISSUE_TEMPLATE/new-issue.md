@@ -17,7 +17,7 @@ assignees: ''
 
 
 ### Details of your setup.
-* Do you use (1) Homebridge UI-X (2) Homebridge CLI or (3) HOOBS? 
+* Do you use (1) Homebridge UI-X (2) Homebridge CLI or (3) HOOBS?
 
 
 
@@ -29,11 +29,11 @@ assignees: ''
 
 
 
-* Which version of this plugin (homebridge-govee) do you have? Has the issue started since upgrading from a previous version?
+* Which version of this plugin (homebridge-thermobit) do you have? Has the issue started since upgrading from a previous version?
 
 
 
-* Which Govee devices do you have that are causing issues? Please include product models if applicable.
+* Which Thermobit devices do you have that are causing issues? Please include product models if applicable.
 
 
 
