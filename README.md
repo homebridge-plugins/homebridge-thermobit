@@ -1,5 +1,5 @@
 <p align="center">
-   <a href="https://github.com/bwp91/homebridge-thermobit"><img src="https://user-images.githubusercontent.com/43026681/101324574-5e997d80-3862-11eb-81b0-932330f6e242.png" width="600px"></a>
+   <a href="https://github.com/bwp91/homebridge-thermobit"><img src="https://user-images.githubusercontent.com/43026681/139461380-5092c1d9-f658-4b64-87e5-72eecf03fb06.png" width="600px"></a>
 </p>
 <span align="center">
 
@@ -8,9 +8,9 @@
 Homebridge plugin to integrate Thermobit devices into HomeKit
 
 [![npm](https://img.shields.io/npm/v/homebridge-thermobit/latest?label=latest)](https://www.npmjs.com/package/homebridge-thermobit)
-[![npm](https://img.shields.io/npm/v/homebridge-thermobit/beta?label=beta)](https://github.com/bwp91/homebridge-thermobit/wiki/Beta-Version)  
+[![npm](https://img.shields.io/npm/v/homebridge-thermobit/beta?label=beta)](https://github.com/bwp91/homebridge-thermobit/wiki/Beta-Version)
 [![npm](https://img.shields.io/npm/dt/homebridge-thermobit)](https://www.npmjs.com/package/homebridge-thermobit)
-[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)  
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![Discord](https://img.shields.io/discord/784827113378676736?color=728ED5&logo=discord&label=bwp91-discord)](https://discord.com/channels/784827113378676736/784827113378676739)
 [![Discord](https://img.shields.io/discord/432663330281226270?color=728ED5&logo=discord&label=hb-discord)](https://discord.com/channels/432663330281226270/742733745743855627)
 
