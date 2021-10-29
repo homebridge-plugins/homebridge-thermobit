@@ -1,0 +1,773 @@
+{
+  "pluginAlias": "Thermobit",
+  "pluginType": "platform",
+  "singular": true,
+  "customUi": true,
+  "customUiPath": "./lib/homebridge-ui",
+  "headerDisplay": "<p align=\"center\"><img width=\"60%\" src=\"https://user-images.githubusercontent.com/43026681/101324574-5e997d80-3862-11eb-81b0-932330f6e242.png\"></p><p align=\"center\">For help and support please visit our <a href=\"https://github.com/bwp91/homebridge-thermobit/wiki\">GitHub Wiki</a>. We hope you find this plugin useful!</p>",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "title": "Plugin Name",
+        "type": "string",
+        "default": "Thermobit"
+      },
+      "username": {
+        "type": "string",
+        "title": "Govee Username",
+        "description": "Required for most device models and for AWS/BLE connections. <a href=\"https://github.com/bwp91/homebridge-govee/wiki/Supported-Devices\" target=\"_blank\">Read more →</a>"
+      },
+      "password": {
+        "type": "string",
+        "title": "Govee Password",
+        "description": "Required for certain light models. <a href=\"https://github.com/bwp91/homebridge-govee/wiki/Supported-Devices\" target=\"_blank\">Read more →</a>"
+      },
+      "apiKey": {
+        "type": "string",
+        "title": "Govee API Key",
+        "description": "Required to enable support for API devices. You can obtain your API key using <a href=\"https://github.com/bwp91/homebridge-govee/wiki/Configuration#obtaining-your-api-key\" target=\"_blank\">this guide</a>."
+      },
+      "refreshTime": {
+        "title": "Refresh Interval",
+        "type": "integer",
+        "description": "An interval (in seconds) in which your API devices will refresh with Govee. Must be 15 or more.",
+        "placeholder": 15,
+        "minimum": 15
+      },
+      "controlInterval": {
+        "title": "Control Interval",
+        "type": "integer",
+        "description": "A minimum delay (in milliseconds) between device updates being sent. Increasing this may help if you find device updates are not working or if you use HomeKit scenes/groupings. Must be 500 or more.",
+        "placeholder": 500,
+        "minimum": 500
+      },
+      "offlineAsOff": {
+        "type": "boolean",
+        "title": "Offline As Off",
+        "description": "If true then devices that are reported as offline will be shown as off in HomeKit."
+      },
+      "disableDeviceLogging": {
+        "type": "boolean",
+        "title": "Disable Device Logging",
+        "description": "Global logging setting for accessory status changes. If true then accessory status changes will not be logged. This can also be set per accessory later in the config."
+      },
+      "debug": {
+        "title": "Debug Logging",
+        "type": "boolean",
+        "description": "Global logging setting for the plugin. If true then debug information will be added to the log. This can also be set per accessory later in the config."
+      },
+      "debugFakegato": {
+        "title": "Debug Fakegato",
+        "type": "boolean",
+        "description": "If true, the included Fakegato library will debug to the log."
+      },
+      "disablePlugin": {
+        "title": "Disable Plugin",
+        "type": "boolean",
+        "description": "If true, the plugin will remove all accessories and not load the plugin on restart."
+      },
+      "lightDevices": {
+        "title": "Light Devices",
+        "description": "Optional settings for Govee Light devices.",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "label": {
+              "title": "Label",
+              "type": "string",
+              "description": "This setting has no effect except to help identify this device."
+            },
+            "deviceId": {
+              "title": "Device ID",
+              "type": "string",
+              "description": "Enter the 23 digit Govee Device ID to begin (e.g. 12:AB:A1:C5:A8:99:D2:17).",
+              "minLength": 23,
+              "maxLength": 23
+            },
+            "ignoreDevice": {
+              "type": "boolean",
+              "title": "Hide From HomeKit",
+              "description": "If true, this accessory will be removed and ignored from HomeKit.",
+              "condition": {
+                "functionBody": "return (model.lightDevices && model.lightDevices[arrayIndices] && model.lightDevices[arrayIndices].deviceId && model.lightDevices[arrayIndices].deviceId.length === 23);"
+              }
+            },
+            "disableAWS": {
+              "title": "Disable AWS Control",
+              "type": "boolean",
+              "description": "If true, the plugin will disable the AWS connection for this device.",
+              "condition": {
+                "functionBody": "return (model.username && model.password && model.lightDevices && model.lightDevices[arrayIndices] && model.lightDevices[arrayIndices].deviceId && model.lightDevices[arrayIndices].deviceId.length === 23 && !model.lightDevices[arrayIndices].ignoreDevice);"
+              }
+            },
+            "enableBT": {
+              "title": "Enable BLE Control",
+              "type": "boolean",
+              "description": "If true, the plugin will try and control this device via bluetooth if available.",
+              "condition": {
+                "functionBody": "return (model.username && model.password && model.lightDevices && model.lightDevices[arrayIndices] && model.lightDevices[arrayIndices].deviceId && model.lightDevices[arrayIndices].deviceId.length === 23 && !model.lightDevices[arrayIndices].ignoreDevice);"
+              }
+            },
+            "customAddress": {
+              "title": "Custom Bluetooth Address",
+              "type": "string",
+              "placeholder": "a1:b2:c3:d4:e5:f6",
+              "description": "The plugin may not be able to determine the bluetooth address of some older models.",
+              "minLength": 17,
+              "maxLength": 17,
+              "condition": {
+                "functionBody": "return (model.lightDevices && model.lightDevices[arrayIndices] && model.lightDevices[arrayIndices].deviceId && model.lightDevices[arrayIndices].deviceId.length === 23 && !model.lightDevices[arrayIndices].ignoreDevice && model.lightDevices[arrayIndices].enableBT);"
+              }
+            },
+            "brightnessStep": {
+              "title": "Brightness Step",
+              "type": "integer",
+              "description": "A minimum step for the brightness slider in the Home app. Must be 1 or more.",
+              "placeholder": 1,
+              "minimum": 1,
+              "condition": {
+                "functionBody": "return (model.lightDevices && model.lightDevices[arrayIndices] && model.lightDevices[arrayIndices].deviceId && model.lightDevices[arrayIndices].deviceId.length === 23 && !model.lightDevices[arrayIndices].ignoreDevice);"
+              }
+            },
+            "adaptiveLightingShift": {
+              "title": "Adaptive Lighting Shift",
+              "type": "integer",
+              "description": "The mired for each Adaptive Lighting update will be increased by this value, making the light appear warmer. Set to -1 to remove Adaptive Lighting feature. Must be -1 or more.",
+              "placeholder": 0,
+              "minimum": -1,
+              "condition": {
+                "functionBody": "return (model.lightDevices && model.lightDevices[arrayIndices] && model.lightDevices[arrayIndices].deviceId && model.lightDevices[arrayIndices].deviceId.length === 23 && !model.lightDevices[arrayIndices].ignoreDevice);"
+              }
+            },
+            "scene": {
+              "title": "Scene",
+              "type": "string",
+              "description": "Enter an AWS code (from logs) or a bluetooth code to create a button named 'Scene' (in Eve app).",
+              "condition": {
+                "functionBody": "return (model.lightDevices && model.lightDevices[arrayIndices] && model.lightDevices[arrayIndices].deviceId && model.lightDevices[arrayIndices].deviceId.length === 23 && !model.lightDevices[arrayIndices].ignoreDevice && (!model.lightDevices[arrayIndices].disableAWS || model.lightDevices[arrayIndices].enableBT));"
+              }
+            },
+            "sceneTwo": {
+              "title": "Scene 2",
+              "type": "string",
+              "description": "Enter an AWS code (from logs) or a bluetooth code to create a button named 'Scene 2' (in Eve app).",
+              "condition": {
+                "functionBody": "return (model.lightDevices && model.lightDevices[arrayIndices] && model.lightDevices[arrayIndices].deviceId && model.lightDevices[arrayIndices].deviceId.length === 23 && !model.lightDevices[arrayIndices].ignoreDevice && (!model.lightDevices[arrayIndices].disableAWS || model.lightDevices[arrayIndices].enableBT));"
+              }
+            },
+            "sceneThree": {
+              "title": "Scene 3",
+              "type": "string",
+              "description": "Enter an AWS code (from logs) or a bluetooth code to create a button named 'Scene 3' (in Eve app).",
+              "condition": {
+                "functionBody": "return (model.lightDevices && model.lightDevices[arrayIndices] && model.lightDevices[arrayIndices].deviceId && model.lightDevices[arrayIndices].deviceId.length === 23 && !model.lightDevices[arrayIndices].ignoreDevice && (!model.lightDevices[arrayIndices].disableAWS || model.lightDevices[arrayIndices].enableBT));"
+              }
+            },
+            "sceneFour": {
+              "title": "Scene 4",
+              "type": "string",
+              "description": "Enter an AWS code (from logs) or a bluetooth code to create a button named 'Scene 4' (in Eve app).",
+              "condition": {
+                "functionBody": "return (model.lightDevices && model.lightDevices[arrayIndices] && model.lightDevices[arrayIndices].deviceId && model.lightDevices[arrayIndices].deviceId.length === 23 && !model.lightDevices[arrayIndices].ignoreDevice && (!model.lightDevices[arrayIndices].disableAWS || model.lightDevices[arrayIndices].enableBT));"
+              }
+            },
+            "musicMode": {
+              "title": "Music Mode",
+              "type": "string",
+              "description": "Enter an AWS code (from logs) or a bluetooth code to create a button named 'Music Mode' (in Eve app).",
+              "condition": {
+                "functionBody": "return (model.lightDevices && model.lightDevices[arrayIndices] && model.lightDevices[arrayIndices].deviceId && model.lightDevices[arrayIndices].deviceId.length === 23 && !model.lightDevices[arrayIndices].ignoreDevice && (!model.lightDevices[arrayIndices].disableAWS || model.lightDevices[arrayIndices].enableBT));"
+              }
+            },
+            "musicModeTwo": {
+              "title": "Music Mode 2",
+              "type": "string",
+              "description": "Enter an AWS code (from logs) or a bluetooth code to create a button named 'Music Mode 2' (in Eve app).",
+              "condition": {
+                "functionBody": "return (model.lightDevices && model.lightDevices[arrayIndices] && model.lightDevices[arrayIndices].deviceId && model.lightDevices[arrayIndices].deviceId.length === 23 && !model.lightDevices[arrayIndices].ignoreDevice && (!model.lightDevices[arrayIndices].disableAWS || model.lightDevices[arrayIndices].enableBT));"
+              }
+            },
+            "diyMode": {
+              "title": "DIY Mode",
+              "type": "string",
+              "description": "Enter an AWS code (from logs) or a bluetooth code to create a button named 'DIY Mode' (in Eve app).",
+              "condition": {
+                "functionBody": "return (model.lightDevices && model.lightDevices[arrayIndices] && model.lightDevices[arrayIndices].deviceId && model.lightDevices[arrayIndices].deviceId.length === 23 && !model.lightDevices[arrayIndices].ignoreDevice && (!model.lightDevices[arrayIndices].disableAWS || model.lightDevices[arrayIndices].enableBT));"
+              }
+            },
+            "diyModeTwo": {
+              "title": "DIY Mode 2",
+              "type": "string",
+              "description": "Enter an AWS code (from logs) or a bluetooth code to create a button named 'DIY Mode 2' (in Eve app).",
+              "condition": {
+                "functionBody": "return (model.lightDevices && model.lightDevices[arrayIndices] && model.lightDevices[arrayIndices].deviceId && model.lightDevices[arrayIndices].deviceId.length === 23 && !model.lightDevices[arrayIndices].ignoreDevice && (!model.lightDevices[arrayIndices].disableAWS || model.lightDevices[arrayIndices].enableBT));"
+              }
+            },
+            "diyModeThree": {
+              "title": "DIY Mode 3",
+              "type": "string",
+              "description": "Enter an AWS code (from logs) or a bluetooth code to create a button named 'DIY Mode 3' (in Eve app).",
+              "condition": {
+                "functionBody": "return (model.lightDevices && model.lightDevices[arrayIndices] && model.lightDevices[arrayIndices].deviceId && model.lightDevices[arrayIndices].deviceId.length === 23 && !model.lightDevices[arrayIndices].ignoreDevice && (!model.lightDevices[arrayIndices].disableAWS || model.lightDevices[arrayIndices].enableBT));"
+              }
+            },
+            "diyModeFour": {
+              "title": "DIY Mode 4",
+              "type": "string",
+              "description": "Enter an AWS code (from logs) or a bluetooth code to create a button named 'DIY Mode 4' (in Eve app).",
+              "condition": {
+                "functionBody": "return (model.lightDevices && model.lightDevices[arrayIndices] && model.lightDevices[arrayIndices].deviceId && model.lightDevices[arrayIndices].deviceId.length === 23 && !model.lightDevices[arrayIndices].ignoreDevice && (!model.lightDevices[arrayIndices].disableAWS || model.lightDevices[arrayIndices].enableBT));"
+              }
+            },
+            "segmented": {
+              "title": "Segmented",
+              "type": "string",
+              "description": "Enter an AWS code (from logs) or a bluetooth code to create a button named 'Segmented' (in Eve app).",
+              "condition": {
+                "functionBody": "return (model.lightDevices && model.lightDevices[arrayIndices] && model.lightDevices[arrayIndices].deviceId && model.lightDevices[arrayIndices].deviceId.length === 23 && !model.lightDevices[arrayIndices].ignoreDevice && (!model.lightDevices[arrayIndices].disableAWS || model.lightDevices[arrayIndices].enableBT));"
+              }
+            },
+            "segmentedTwo": {
+              "title": "Segmented 2",
+              "type": "string",
+              "description": "Enter an AWS code (from logs) or a bluetooth code to create a button named 'Segmented 2' (in Eve app).",
+              "condition": {
+                "functionBody": "return (model.lightDevices && model.lightDevices[arrayIndices] && model.lightDevices[arrayIndices].deviceId && model.lightDevices[arrayIndices].deviceId.length === 23 && !model.lightDevices[arrayIndices].ignoreDevice && (!model.lightDevices[arrayIndices].disableAWS || model.lightDevices[arrayIndices].enableBT));"
+              }
+            },
+            "segmentedThree": {
+              "title": "Segmented 3",
+              "type": "string",
+              "description": "Enter an AWS code (from logs) or a bluetooth code to create a button named 'Segmented 3' (in Eve app).",
+              "condition": {
+                "functionBody": "return (model.lightDevices && model.lightDevices[arrayIndices] && model.lightDevices[arrayIndices].deviceId && model.lightDevices[arrayIndices].deviceId.length === 23 && !model.lightDevices[arrayIndices].ignoreDevice && (!model.lightDevices[arrayIndices].disableAWS || model.lightDevices[arrayIndices].enableBT));"
+              }
+            },
+            "segmentedFour": {
+              "title": "Segmented 4",
+              "type": "string",
+              "description": "Enter an AWS code (from logs) or a bluetooth code to create a button named 'Segmented 4' (in Eve app).",
+              "condition": {
+                "functionBody": "return (model.lightDevices && model.lightDevices[arrayIndices] && model.lightDevices[arrayIndices].deviceId && model.lightDevices[arrayIndices].deviceId.length === 23 && !model.lightDevices[arrayIndices].ignoreDevice && (!model.lightDevices[arrayIndices].disableAWS || model.lightDevices[arrayIndices].enableBT));"
+              }
+            },
+            "overrideLogging": {
+              "type": "string",
+              "title": "Override Logging Setting",
+              "description": "Override global logging setting for this device.",
+              "oneOf": [
+                {
+                  "title": "Default (Use Global Setting)",
+                  "enum": ["default"]
+                },
+                {
+                  "title": "Enable Standard Logging",
+                  "enum": ["standard"]
+                },
+                {
+                  "title": "Enable Debug Logging",
+                  "enum": ["debug"]
+                },
+                {
+                  "title": "Disable All Logging",
+                  "enum": ["disable"]
+                }
+              ],
+              "condition": {
+                "functionBody": "return (model.lightDevices && model.lightDevices[arrayIndices] && model.lightDevices[arrayIndices].deviceId && model.lightDevices[arrayIndices].deviceId.length === 23 && !model.lightDevices[arrayIndices].ignoreDevice);"
+              }
+            }
+          }
+        }
+      },
+      "switchDevices": {
+        "title": "Outlet Devices",
+        "description": "Optional settings for Govee Outlet devices.",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "label": {
+              "title": "Label",
+              "type": "string",
+              "description": "This setting has no effect except to help identify this device."
+            },
+            "deviceId": {
+              "title": "Device ID",
+              "type": "string",
+              "description": "Enter the 23 digit Govee Device ID to begin (e.g. 12:AB:A1:C5:A8:99:D2:17).",
+              "minLength": 23,
+              "maxLength": 23
+            },
+            "ignoreDevice": {
+              "type": "boolean",
+              "title": "Hide From HomeKit",
+              "description": "If true, this accessory will be removed and ignored from HomeKit.",
+              "condition": {
+                "functionBody": "return (model.switchDevices && model.switchDevices[arrayIndices] && model.switchDevices[arrayIndices].deviceId && model.switchDevices[arrayIndices].deviceId.length === 23);"
+              }
+            },
+            "showAs": {
+              "type": "string",
+              "title": "Show As",
+              "oneOf": [
+                {
+                  "title": "Outlet (Default)",
+                  "enum": ["default"]
+                },
+                {
+                  "title": "Switch",
+                  "enum": ["switch"]
+                },
+                {
+                  "title": "Air Purifier",
+                  "enum": ["purifier"]
+                }
+              ],
+              "condition": {
+                "functionBody": "return (model.switchDevices && model.switchDevices[arrayIndices] && model.switchDevices[arrayIndices].deviceId && model.switchDevices[arrayIndices].deviceId.length === 23 && !model.switchDevices[arrayIndices].ignoreDevice);"
+              }
+            },
+            "overrideLogging": {
+              "type": "string",
+              "title": "Override Logging Setting",
+              "description": "Override global logging setting for this device.",
+              "oneOf": [
+                {
+                  "title": "Default (Use Global Setting)",
+                  "enum": ["default"]
+                },
+                {
+                  "title": "Enable Standard Logging",
+                  "enum": ["standard"]
+                },
+                {
+                  "title": "Enable Debug Logging",
+                  "enum": ["debug"]
+                },
+                {
+                  "title": "Disable All Logging",
+                  "enum": ["disable"]
+                }
+              ],
+              "condition": {
+                "functionBody": "return (model.switchDevices && model.switchDevices[arrayIndices] && model.switchDevices[arrayIndices].deviceId && model.switchDevices[arrayIndices].deviceId.length === 23 && !model.switchDevices[arrayIndices].ignoreDevice);"
+              }
+            }
+          }
+        }
+      },
+      "leakDevices": {
+        "title": "Leak Sensor Devices",
+        "description": "Optional settings for Govee Leak Sensor devices.",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "label": {
+              "title": "Label",
+              "type": "string",
+              "description": "This setting has no effect except to help identify this device."
+            },
+            "deviceId": {
+              "title": "Device ID",
+              "type": "string",
+              "description": "Enter the 18 digit Govee Device ID to begin (e.g. 12AB34CD56EF78009F).",
+              "minLength": 18,
+              "maxLength": 18
+            },
+            "ignoreDevice": {
+              "type": "boolean",
+              "title": "Hide From HomeKit",
+              "description": "If true, this accessory will be removed and ignored from HomeKit.",
+              "condition": {
+                "functionBody": "return (model.leakDevices && model.leakDevices[arrayIndices] && model.leakDevices[arrayIndices].deviceId && model.leakDevices[arrayIndices].deviceId.length === 18);"
+              }
+            },
+            "lowBattThreshold": {
+              "type": "integer",
+              "title": "Low Battery Threshold",
+              "description": "HomeKit will set the low battery status for this device when the battery reaches this percentage level. Must be 1 or more.",
+              "placeholder": 20,
+              "minimum": 1,
+              "condition": {
+                "functionBody": "return (model.leakDevices && model.leakDevices[arrayIndices] && model.leakDevices[arrayIndices].deviceId && model.leakDevices[arrayIndices].deviceId.length === 18 && !model.leakDevices[arrayIndices].ignoreDevice);"
+              }
+            },
+            "overrideLogging": {
+              "type": "string",
+              "title": "Override Logging Setting",
+              "description": "Override global logging setting for this device.",
+              "oneOf": [
+                {
+                  "title": "Default (Use Global Setting)",
+                  "enum": ["default"]
+                },
+                {
+                  "title": "Enable Standard Logging",
+                  "enum": ["standard"]
+                },
+                {
+                  "title": "Enable Debug Logging",
+                  "enum": ["debug"]
+                },
+                {
+                  "title": "Disable All Logging",
+                  "enum": ["disable"]
+                }
+              ],
+              "condition": {
+                "functionBody": "return (model.leakDevices && model.leakDevices[arrayIndices] && model.leakDevices[arrayIndices].deviceId && model.leakDevices[arrayIndices].deviceId.length === 18 && !model.leakDevices[arrayIndices].ignoreDevice);"
+              }
+            }
+          }
+        }
+      },
+      "thermoDevices": {
+        "title": "Thermo Sensor Devices",
+        "description": "Optional settings for Govee Thermo-Hygrometer devices.",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "label": {
+              "title": "Label",
+              "type": "string",
+              "description": "This setting has no effect except to help identify this device."
+            },
+            "deviceId": {
+              "title": "Device ID",
+              "type": "string",
+              "description": "Enter the 23 digit Govee Device ID to begin (e.g. 12:AB:A1:C5:A8:99:D2:17).",
+              "minLength": 23,
+              "maxLength": 23
+            },
+            "ignoreDevice": {
+              "type": "boolean",
+              "title": "Hide From HomeKit",
+              "description": "If true, this accessory will be removed and ignored from HomeKit.",
+              "condition": {
+                "functionBody": "return (model.thermoDevices && model.thermoDevices[arrayIndices] && model.thermoDevices[arrayIndices].deviceId && model.thermoDevices[arrayIndices].deviceId.length === 23);"
+              }
+            },
+            "lowBattThreshold": {
+              "type": "integer",
+              "title": "Low Battery Threshold",
+              "description": "HomeKit will set the low battery status for this device when the battery reaches this percentage level. Must be 1 or more.",
+              "placeholder": 20,
+              "minimum": 1,
+              "condition": {
+                "functionBody": "return (model.thermoDevices && model.thermoDevices[arrayIndices] && model.thermoDevices[arrayIndices].deviceId && model.thermoDevices[arrayIndices].deviceId.length === 23 && !model.thermoDevices[arrayIndices].ignoreDevice);"
+              }
+            },
+            "overrideLogging": {
+              "type": "string",
+              "title": "Override Logging Setting",
+              "description": "Override global logging setting for this device.",
+              "oneOf": [
+                {
+                  "title": "Default (Use Global Setting)",
+                  "enum": ["default"]
+                },
+                {
+                  "title": "Enable Standard Logging",
+                  "enum": ["standard"]
+                },
+                {
+                  "title": "Enable Debug Logging",
+                  "enum": ["debug"]
+                },
+                {
+                  "title": "Disable All Logging",
+                  "enum": ["disable"]
+                }
+              ],
+              "condition": {
+                "functionBody": "return (model.thermoDevices && model.thermoDevices[arrayIndices] && model.thermoDevices[arrayIndices].deviceId && model.thermoDevices[arrayIndices].deviceId.length === 23 && !model.thermoDevices[arrayIndices].ignoreDevice);"
+              }
+            }
+          }
+        }
+      },
+      "heaterDevices": {
+        "title": "Heater Devices",
+        "description": "Optional settings for Govee Heater devices.",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "label": {
+              "title": "Label",
+              "type": "string",
+              "description": "This setting has no effect except to help identify this device."
+            },
+            "deviceId": {
+              "title": "Device ID",
+              "type": "string",
+              "description": "Enter the 23 digit Govee Device ID to begin (e.g. 12:AB:A1:C5:A8:99:D2:17).",
+              "minLength": 23,
+              "maxLength": 23
+            },
+            "ignoreDevice": {
+              "type": "boolean",
+              "title": "Hide From HomeKit",
+              "description": "If true, this accessory will be removed and ignored from HomeKit.",
+              "condition": {
+                "functionBody": "return (model.heaterDevices && model.heaterDevices[arrayIndices] && model.heaterDevices[arrayIndices].deviceId && model.heaterDevices[arrayIndices].deviceId.length === 23);"
+              }
+            },
+            "overrideLogging": {
+              "type": "string",
+              "title": "Override Logging Setting",
+              "description": "Override global logging setting for this device.",
+              "oneOf": [
+                {
+                  "title": "Default (Use Global Setting)",
+                  "enum": ["default"]
+                },
+                {
+                  "title": "Enable Standard Logging",
+                  "enum": ["standard"]
+                },
+                {
+                  "title": "Enable Debug Logging",
+                  "enum": ["debug"]
+                },
+                {
+                  "title": "Disable All Logging",
+                  "enum": ["disable"]
+                }
+              ],
+              "condition": {
+                "functionBody": "return (model.heaterDevices && model.heaterDevices[arrayIndices] && model.heaterDevices[arrayIndices].deviceId && model.heaterDevices[arrayIndices].deviceId.length === 23 && !model.heaterDevices[arrayIndices].ignoreDevice);"
+              }
+            }
+          }
+        }
+      },
+      "humidifierDevices": {
+        "title": "Humidifier Devices",
+        "description": "Optional settings for Govee Humidifier devices.",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "label": {
+              "title": "Label",
+              "type": "string",
+              "description": "This setting has no effect except to help identify this device."
+            },
+            "deviceId": {
+              "title": "Device ID",
+              "type": "string",
+              "description": "Enter the 23 digit Govee Device ID to begin (e.g. 12:AB:A1:C5:A8:99:D2:17).",
+              "minLength": 23,
+              "maxLength": 23
+            },
+            "ignoreDevice": {
+              "type": "boolean",
+              "title": "Hide From HomeKit",
+              "description": "If true, this accessory will be removed and ignored from HomeKit.",
+              "condition": {
+                "functionBody": "return (model.humidifierDevices && model.humidifierDevices[arrayIndices] && model.humidifierDevices[arrayIndices].deviceId && model.humidifierDevices[arrayIndices].deviceId.length === 23);"
+              }
+            },
+            "overrideLogging": {
+              "type": "string",
+              "title": "Override Logging Setting",
+              "description": "Override global logging setting for this device.",
+              "oneOf": [
+                {
+                  "title": "Default (Use Global Setting)",
+                  "enum": ["default"]
+                },
+                {
+                  "title": "Enable Standard Logging",
+                  "enum": ["standard"]
+                },
+                {
+                  "title": "Enable Debug Logging",
+                  "enum": ["debug"]
+                },
+                {
+                  "title": "Disable All Logging",
+                  "enum": ["disable"]
+                }
+              ],
+              "condition": {
+                "functionBody": "return (model.humidifierDevices && model.humidifierDevices[arrayIndices] && model.humidifierDevices[arrayIndices].deviceId && model.humidifierDevices[arrayIndices].deviceId.length === 23 && !model.humidifierDevices[arrayIndices].ignoreDevice);"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "layout": [
+    {
+      "type": "fieldset",
+      "title": "Required Settings",
+      "items": ["username", "password", "apiKey"]
+    },
+    {
+      "type": "fieldset",
+      "title": "Optional Settings",
+      "description": "Optional settings for the plugin, including refreshing and global logging settings.",
+      "expandable": true,
+      "items": [
+        "refreshTime",
+        "controlInterval",
+        "offlineAsOff",
+        "disableDeviceLogging",
+        "debug",
+        "disablePlugin"
+      ]
+    },
+    {
+      "key": "lightDevices",
+      "expandable": true,
+      "title": "Light Devices",
+      "description": "Optional settings for Govee Light devices.",
+      "add": "Add Another Device",
+      "type": "array",
+      "items": [
+        {
+          "type": "fieldset",
+          "items": [
+            "lightDevices[].label",
+            "lightDevices[].deviceId",
+            "lightDevices[].ignoreDevice",
+            "lightDevices[].disableAWS",
+            "lightDevices[].enableBT",
+            "lightDevices[].customAddress",
+            "lightDevices[].brightnessStep",
+            "lightDevices[].adaptiveLightingShift",
+            {
+              "expandable": true,
+              "title": "Custom Scenes/Modes",
+              "type": "fieldset",
+              "description": "Use these settings to start creating HomeKit scenes with your Govee scenes, music mode and DIY modes. These options are only available if 'Disable AWS Control' is not ticked or 'Enable BLE Control' is ticked above. <a href=\"https://github.com/bwp91/homebridge-govee/wiki/Scene%2C-Music%2C-DIY-Modes\" target=\"_blank\">Read more →</a>",
+              "items": [
+                "lightDevices[].scene",
+                "lightDevices[].sceneTwo",
+                "lightDevices[].sceneThree",
+                "lightDevices[].sceneFour",
+                "lightDevices[].musicMode",
+                "lightDevices[].musicModeTwo",
+                "lightDevices[].diyMode",
+                "lightDevices[].diyModeTwo",
+                "lightDevices[].diyModeThree",
+                "lightDevices[].diyModeFour",
+                "lightDevices[].segmented",
+                "lightDevices[].segmentedTwo",
+                "lightDevices[].segmentedThree",
+                "lightDevices[].segmentedFour"
+              ]
+            },
+            "lightDevices[].overrideLogging"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "switchDevices",
+      "expandable": true,
+      "title": "Outlet Devices",
+      "description": "Optional settings for Govee Outlet devices.",
+      "add": "Add Another Device",
+      "type": "array",
+      "items": [
+        {
+          "type": "fieldset",
+          "items": [
+            "switchDevices[].label",
+            "switchDevices[].deviceId",
+            "switchDevices[].ignoreDevice",
+            "switchDevices[].showAs",
+            "switchDevices[].overrideLogging"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "leakDevices",
+      "expandable": true,
+      "title": "Leak Sensor Devices",
+      "description": "Optional settings for Govee Leak Sensor devices.",
+      "add": "Add Another Device",
+      "type": "array",
+      "items": [
+        {
+          "type": "fieldset",
+          "items": [
+            "leakDevices[].label",
+            "leakDevices[].deviceId",
+            "leakDevices[].lowBattThreshold",
+            "leakDevices[].ignoreDevice",
+            "leakDevices[].overrideLogging"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "thermoDevices",
+      "expandable": true,
+      "title": "Thermo Sensor Devices",
+      "description": "Optional settings for Govee Thermo-Hygrometer devices.",
+      "add": "Add Another Device",
+      "type": "array",
+      "items": [
+        {
+          "type": "fieldset",
+          "items": [
+            "thermoDevices[].label",
+            "thermoDevices[].deviceId",
+            "thermoDevices[].ignoreDevice",
+            "thermoDevices[].lowBattThreshold",
+            "thermoDevices[].overrideLogging"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "heaterDevices",
+      "expandable": true,
+      "title": "Heater Devices",
+      "description": "Optional settings for Govee Heater devices.",
+      "add": "Add Another Device",
+      "type": "array",
+      "items": [
+        {
+          "type": "fieldset",
+          "items": [
+            "heaterDevices[].label",
+            "heaterDevices[].deviceId",
+            "heaterDevices[].ignoreDevice",
+            "heaterDevices[].overrideLogging"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "humidifierDevices",
+      "expandable": true,
+      "title": "Humidifier Devices",
+      "description": "Optional settings for Govee Humidifier devices.",
+      "add": "Add Another Device",
+      "type": "array",
+      "items": [
+        {
+          "type": "fieldset",
+          "items": [
+            "humidifierDevices[].label",
+            "humidifierDevices[].deviceId",
+            "humidifierDevices[].ignoreDevice",
+            "humidifierDevices[].overrideLogging"
+          ]
+        }
+      ]
+    }
+  ]
+}

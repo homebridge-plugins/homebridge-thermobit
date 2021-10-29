@@ -1,0 +1,451 @@
+<p class="text-center">
+  <img
+    src="https://user-images.githubusercontent.com/43026681/101324574-5e997d80-3862-11eb-81b0-932330f6e242.png"
+    alt="homebridge-govee logo"
+    style="width: 60%;"
+  />
+</p>
+<div id="pageIntro" class="text-center" style="display: none;">
+  <p class="lead">Thank you for installing <strong>homebridge-govee</strong></p>
+  <p>
+    You will need your Govee credentials and/or
+    <a
+      href="https://github.com/bwp91/homebridge-govee/wiki/Configuration#obtaining-your-api-key"
+      target="_blank"
+      >Govee API key</a
+    >
+    to continue
+  </p>
+  <button type="button" class="btn btn-primary" id="introContinue">Continue &rarr;</button>
+</div>
+<div
+  id="menuWrapper"
+  class="btn-group w-100 mb-0"
+  role="group"
+  aria-label="UI Menu"
+  style="display: none;"
+>
+  <button type="button" class="btn btn-primary ml-0" id="menuSettings">Settings</button>
+  <button type="button" class="btn btn-primary" id="menuDevices">My Devices</button>
+  <button type="button" class="btn btn-primary mr-0" id="menuHome">Support</button>
+</div>
+<div
+  id="disabledBanner"
+  class="alert alert-secondary mb-0 mt-3"
+  role="alert"
+  style="display: none;"
+>
+  Plugin is currently disabled
+  <button id="disabledEnable" type="button" class="btn btn-link p-0 m-0 float-right">Enable</button>
+</div>
+<div id="pageDevices" class="mt-4" style="display: none;">
+  <div id="deviceInfo">
+    <form>
+      <div class="form-group">
+        <select class="form-control" id="deviceSelect"></select>
+      </div>
+    </form>
+    <table class="table w-100" id="deviceTable" style="display: none;">
+      <thead>
+        <tr class="table-active">
+          <th scope="col" style="width: 40%;">Device Name</th>
+          <th scope="col" style="width: 60%;" id="displayName"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Govee Device ID</th>
+          <td id="deviceId"></td>
+        </tr>
+        <tr>
+          <th scope="row">Govee Model</th>
+          <td id="model"></td>
+        </tr>
+        <tr id="row_cloud_status" style="display: none;">
+          <th scope="row">Cloud Status</th>
+          <td id="cloud_status"></td>
+        </tr>
+        <tr>
+          <th scope="row">API Supported</th>
+          <td id="api_supported"></td>
+        </tr>
+        <tr id="row_api_enabled" style="display: none;">
+          <th scope="row">API Enabled</th>
+          <td id="api_enabled"></td>
+        </tr>
+        <tr>
+          <th scope="row">AWS Supported</th>
+          <td id="aws_supported"></td>
+        </tr>
+        <tr id="row_aws_enabled" style="display: none;">
+          <th scope="row">AWS Enabled</th>
+          <td id="aws_enabled"></td>
+        </tr>
+        <tr>
+          <th scope="row">Bluetooth Supported</th>
+          <td id="ble_supported"></td>
+        </tr>
+        <tr id="row_ble_enabled" style="display: none;">
+          <th scope="row">Bluetooth Enabled</th>
+          <td id="ble_enabled"></td>
+        </tr>
+        <tr id="row_ble_address" style="display: none;">
+          <th scope="row">Bluetooth Address</th>
+          <td id="ble_address"></td>
+        </tr>
+        <tr id="row_supported_cmds" style="display: none;">
+          <th scope="row">Supported Commands</th>
+          <td id="supported_cmds"></td>
+        </tr>
+        <tr>
+          <th scope="row">Firmware Version</th>
+          <td id="firmware"></td>
+        </tr>
+        <tr>
+          <th scope="row">Hardware Version</th>
+          <td id="hardware"></td>
+        </tr>
+        <tr id="row_kelvin_range" style="display: none;">
+          <th scope="row">Kelvin Range</th>
+          <td id="kelvin_range"></td>
+        </tr>
+        <tr id="row_temp_range" style="display: none;">
+          <th scope="row">Temperature Range</th>
+          <td id="temp_range"></td>
+        </tr>
+        <tr id="row_humi_range" style="display: none;">
+          <th scope="row">Humidity Range</th>
+          <td id="humi_range"></td>
+        </tr>
+        <tr>
+          <td colspan="2" style="text-align: center" id="image"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div id="pageSupport" class="mt-4" style="display: none;">
+  <p class="text-center lead">Thank you for using <strong>homebridge-govee</strong></p>
+  <p class="text-center">The links below will take you to our GitHub wiki</p>
+  <h4>Setup</h4>
+  <ul>
+    <li>
+      <a href="https://github.com/bwp91/homebridge-govee/wiki/Installation" target="_blank"
+        >Installation</a
+      >
+    </li>
+    <li>
+      <a href="https://github.com/bwp91/homebridge-govee/wiki/Configuration" target="_blank"
+        >Configuration</a
+      >
+    </li>
+    <li>
+      <a href="https://github.com/bwp91/homebridge-govee/wiki/Beta-Version" target="_blank"
+        >Beta Version</a
+      >
+    </li>
+    <li>
+      <a href="https://github.com/bwp91/homebridge-govee/wiki/Node-Version" target="_blank"
+        >Node Version</a
+      >
+    </li>
+    <li>
+      <a href="https://github.com/bwp91/homebridge-govee/wiki/Uninstallation" target="_blank"
+        >Uninstallation</a
+      >
+    </li>
+  </ul>
+  <h4>Features</h4>
+  <ul>
+    <li>
+      <a href="https://github.com/bwp91/homebridge-govee/wiki/Supported-Devices" target="_blank"
+        >Supported Devices</a
+      >
+    </li>
+    <li>
+      <a href="https://github.com/bwp91/homebridge-govee/wiki/Connection-Methods" target="_blank"
+        >Connection Methods</a
+      >
+    </li>
+    <ul>
+      <li>
+        <a href="https://github.com/bwp91/homebridge-govee/wiki/API-Control" target="_blank"
+          >API Control</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/bwp91/homebridge-govee/wiki/AWS-Control" target="_blank"
+          >AWS Control</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/bwp91/homebridge-govee/wiki/Bluetooth-Control" target="_blank"
+          >Bluetooth Control</a
+        >
+      </li>
+    </ul>
+    <li>
+      <a
+        href="https://github.com/bwp91/homebridge-govee/wiki/Scene%2C-Music%2C-DIY-Modes"
+        target="_blank"
+        >Scene, Music, DIY Modes</a
+      >
+    </li>
+  </ul>
+  <h4>Help/About</h4>
+  <ul>
+    <li>
+      <a href="https://github.com/bwp91/homebridge-govee/wiki/Common-Errors" target="_blank"
+        >Common Errors</a
+      >
+    </li>
+    <li>
+      <a href="https://github.com/bwp91/homebridge-govee/issues/new/choose" target="_blank"
+        >Support Request</a
+      >
+    </li>
+    <li>
+      <a href="https://github.com/bwp91/homebridge-govee/blob/latest/CHANGELOG.md" target="_blank"
+        >Changelog</a
+      >
+    </li>
+    <li><a href="https://github.com/sponsors/bwp91" target="_blank">About Me</a></li>
+  </ul>
+  <h4>Credits</h4>
+  <ul>
+    <li>To all users who have shared their devices to enable functionality.</li>
+    <li>
+      To the creator/owner of the
+      <a href="https://www.npmjs.com/package/govee-led-client" target="_blank">govee-led-client</a>
+      library which made the bluetooth connection possible.
+    </li>
+    <li>
+      To the creator/owner of the
+      <a href="https://github.com/towlerj/govee_api" target="_blank">govee_api</a>
+      library which made the AWS connection possible.
+    </li>
+    <li>
+      To <a href="https://github.com/JeremyDunn" target="_blank">@JeremyDunn</a> for his code from
+      <a href="https://github.com/JeremyDunn/homebridge-govee-water-detectors" target="_blank"
+        >homebridge-govee-water-detectors</a
+      >
+      for leak sensor support.
+    </li>
+    <li>
+      To the creator of the awesome plugin header logo:
+      <a href="https://www.instagram.com/keryan.me" target="_blank">Keryan Belahcene</a>.
+    </li>
+    <li>
+      To the creators/contributors of
+      <a href="https://homebridge.io" target="_blank">Homebridge</a> who make this plugin possible.
+    </li>
+  </ul>
+  <h4>Disclaimer</h4>
+  <ul>
+    <li>
+      I am in no way affiliated with Govee and this plugin is a personal project that I maintain in
+      my free time.
+    </li>
+    <li>Use this plugin entirely at your own risk - please see licence for more information.</li>
+  </ul>
+</div>
+<script>
+  ;(async () => {
+    try {
+      const currentConfig = await homebridge.getPluginConfig()
+      showIntro = () => {
+        const introContinue = document.getElementById('introContinue')
+        introContinue.addEventListener('click', () => {
+          homebridge.showSpinner()
+          document.getElementById('pageIntro').style.display = 'none'
+          document.getElementById('menuWrapper').style.display = 'inline-flex'
+          showSettings()
+          homebridge.hideSpinner()
+        })
+        document.getElementById('pageIntro').style.display = 'block'
+      }
+      showDevices = async () => {
+        homebridge.showSpinner()
+        homebridge.hideSchemaForm()
+        document.getElementById('menuHome').classList.remove('btn-elegant')
+        document.getElementById('menuHome').classList.add('btn-primary')
+        document.getElementById('menuDevices').classList.add('btn-elegant')
+        document.getElementById('menuDevices').classList.remove('btn-primary')
+        document.getElementById('menuSettings').classList.remove('btn-elegant')
+        document.getElementById('menuSettings').classList.add('btn-primary')
+        document.getElementById('pageSupport').style.display = 'none'
+        document.getElementById('pageDevices').style.display = 'block'
+        const cachedAccessories =
+          typeof homebridge.getCachedAccessories === 'function'
+            ? await homebridge.getCachedAccessories()
+            : await homebridge.request('/getCachedAccessories')
+        if (cachedAccessories.length > 0) {
+          cachedAccessories.sort((a, b) => {
+            return a.displayName.toLowerCase() > b.displayName.toLowerCase()
+              ? 1
+              : b.displayName.toLowerCase() > a.displayName.toLowerCase()
+              ? -1
+              : 0
+          })
+        }
+        const deviceSelect = document.getElementById('deviceSelect')
+        deviceSelect.innerHTML = ''
+        cachedAccessories.forEach(a => {
+          const option = document.createElement('option')
+          option.text = a.displayName
+          option.value = a.context.gvDeviceId
+          deviceSelect.add(option)
+        })
+        showDeviceInfo = async hbDeviceId => {
+          homebridge.showSpinner()
+          const thisAcc = cachedAccessories.find(x => x.context.gvDeviceId === hbDeviceId)
+          const context = thisAcc.context
+          document.getElementById('displayName').innerHTML = thisAcc.displayName
+          document.getElementById('deviceId').innerHTML = context.gvDeviceId || 'N/A'
+          document.getElementById('model').innerHTML = context.gvModel || 'N/A'
+          if (context.isOnline) {
+            // Reports 'yes' or 'no'
+            document.getElementById('cloud_status').innerHTML =
+              context.isOnline === 'yes'
+                ? '<i class="fas fa-circle mr-1 green-text"></i> Online'
+                : '<i class="fas fa-circle mr-1 red-text"></i> Offline'
+            document.getElementById('row_cloud_status').style.display = 'table-row'
+          } else {
+            document.getElementById('row_cloud_status').style.display = 'none'
+          }
+          if (context.hasAPIControl) {
+            document.getElementById('api_supported').innerHTML = 'Yes'
+            document.getElementById('api_enabled').innerHTML = context.useAPIControl ? 'Yes' : 'No'
+            document.getElementById('row_api_enabled').style.display = 'table-row'
+          } else {
+            document.getElementById('api_supported').innerHTML = 'No'
+            document.getElementById('row_api_enabled').style.display = 'none'
+          }
+          if (context.hasAWSControl) {
+            document.getElementById('aws_supported').innerHTML = 'Yes'
+            document.getElementById('aws_enabled').innerHTML = context.useAWSControl ? 'Yes' : 'No'
+            document.getElementById('row_aws_enabled').style.display = 'table-row'
+          } else {
+            document.getElementById('aws_supported').innerHTML = 'No'
+            document.getElementById('row_aws_enabled').style.display = 'none'
+          }
+          if (context.hasBLEControl) {
+            document.getElementById('ble_supported').innerHTML = 'Yes'
+            document.getElementById('ble_enabled').innerHTML = context.useBLEControl ? 'Yes' : 'No'
+            document.getElementById('ble_address').innerHTML = context.bleAddress
+            document.getElementById('row_ble_enabled').style.display = 'table-row'
+            document.getElementById('row_ble_address').style.display = 'none'
+          } else {
+            document.getElementById('ble_supported').innerHTML = 'No'
+            document.getElementById('row_ble_enabled').style.display = 'table-row'
+            document.getElementById('row_ble_address').style.display = 'none'
+          }
+          if (context.supportedCmds && Array.isArray(context.supportedCmds)) {
+            document.getElementById('supported_cmds').innerHTML = context.supportedCmds.join(', ')
+            document.getElementById('row_supported_cmds').style.display = 'table-row'
+          } else {
+            document.getElementById('row_supported_cmds').style.display = 'none'
+          }
+          document.getElementById('firmware').innerHTML = context.firmware
+            ? context.firmware
+            : 'N/A'
+          document.getElementById('hardware').innerHTML = context.hardware
+            ? context.hardware
+            : 'N/A'
+          if (context.maxKelvin) {
+            document.getElementById('kelvin_range').innerHTML =
+              context.minKelvin + 'K - ' + context.maxKelvin + 'K'
+            document.getElementById('row_kelvin_range').style.display = 'table-row'
+          } else {
+            document.getElementById('row_kelvin_range').style.display = 'none'
+          }
+          if (context.maxTemp) {
+            document.getElementById('temp_range').innerHTML =
+              context.minTemp + '°C - ' + context.maxTemp + '°C'
+            document.getElementById('row_temp_range').style.display = 'table-row'
+          } else {
+            document.getElementById('row_temp_range').style.display = 'none'
+          }
+          if (context.maxHumi) {
+            document.getElementById('humi_range').innerHTML =
+              context.minHumi + '% - ' + context.maxHumi + '%'
+            document.getElementById('row_humi_range').style.display = 'table-row'
+          } else {
+            document.getElementById('row_humi_range').style.display = 'none'
+          }
+          document.getElementById('image').innerHTML = context.image
+            ? '<img src="' + context.image + '" style="width: 150px;">'
+            : ''
+          document.getElementById('deviceTable').style.display = 'inline-table'
+          homebridge.hideSpinner()
+        }
+        deviceSelect.addEventListener('change', event => showDeviceInfo(event.target.value))
+        if (cachedAccessories.length > 0) {
+          showDeviceInfo(cachedAccessories[0].context.gvDeviceId)
+        } else {
+          const option = document.createElement('option')
+          option.text = 'No Devices'
+          deviceSelect.add(option)
+          deviceSelect.disabled = true
+        }
+        homebridge.hideSpinner()
+      }
+      showSupport = () => {
+        homebridge.showSpinner()
+        homebridge.hideSchemaForm()
+        document.getElementById('menuHome').classList.add('btn-elegant')
+        document.getElementById('menuHome').classList.remove('btn-primary')
+        document.getElementById('menuDevices').classList.remove('btn-elegant')
+        document.getElementById('menuDevices').classList.add('btn-primary')
+        document.getElementById('menuSettings').classList.remove('btn-elegant')
+        document.getElementById('menuSettings').classList.add('btn-primary')
+        document.getElementById('pageSupport').style.display = 'block'
+        document.getElementById('pageDevices').style.display = 'none'
+        homebridge.hideSpinner()
+      }
+      showSettings = () => {
+        homebridge.showSpinner()
+        document.getElementById('menuHome').classList.remove('btn-elegant')
+        document.getElementById('menuHome').classList.add('btn-primary')
+        document.getElementById('menuDevices').classList.remove('btn-elegant')
+        document.getElementById('menuDevices').classList.add('btn-primary')
+        document.getElementById('menuSettings').classList.add('btn-elegant')
+        document.getElementById('menuSettings').classList.remove('btn-primary')
+        document.getElementById('pageSupport').style.display = 'none'
+        document.getElementById('pageDevices').style.display = 'none'
+        homebridge.showSchemaForm()
+        homebridge.hideSpinner()
+      }
+      showDisabledBanner = () => {
+        document.getElementById('disabledBanner').style.display = 'block'
+      }
+      enablePlugin = async () => {
+        homebridge.showSpinner()
+        document.getElementById('disabledBanner').style.display = 'none'
+        currentConfig[0].disablePlugin = false
+        await homebridge.updatePluginConfig(currentConfig)
+        await homebridge.savePluginConfig()
+        homebridge.hideSpinner()
+      }
+      menuHome.addEventListener('click', () => showSupport())
+      menuDevices.addEventListener('click', () => showDevices())
+      menuSettings.addEventListener('click', () => showSettings())
+      disabledEnable.addEventListener('click', () => enablePlugin())
+      if (currentConfig.length) {
+        document.getElementById('menuWrapper').style.display = 'inline-flex'
+        showSettings()
+        if (currentConfig[0].disablePlugin) {
+          showDisabledBanner()
+        }
+      } else {
+        currentConfig.push({ name: 'Govee' })
+        await homebridge.updatePluginConfig(currentConfig)
+        showIntro()
+      }
+    } catch (err) {
+      homebridge.toast.error(err.message, 'Error')
+    } finally {
+      homebridge.hideSpinner()
+    }
+  })()
+</script>
