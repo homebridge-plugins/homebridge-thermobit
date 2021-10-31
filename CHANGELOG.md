@@ -2,6 +2,6 @@
 
 All notable changes to homebridge-thermobit will be documented in this file.
 
-## BETA
+## 1.0.0 (2021-10-31)
 
-- Development releases
+- Initial release
