@@ -2,6 +2,12 @@
 
 All notable changes to homebridge-thermobit will be documented in this file.
 
+## 1.1.0 (2021-10-31)
+
+## Added
+
+- Use heater accessory instead of sensor
+
 ## 1.0.1 (2021-10-31)
 
 ### Changed
