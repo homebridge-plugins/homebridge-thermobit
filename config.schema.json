@@ -61,7 +61,7 @@
       "title": "Optional Settings",
       "description": "Optional settings for the plugin, including refreshing and global logging settings.",
       "expandable": true,
-      "items": ["refreshTime", "debug", "disablePlugin"]
+      "items": ["refreshTime", "disableDeviceLogging", "debug", "disablePlugin"]
     }
   ]
 }
