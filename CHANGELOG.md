@@ -2,6 +2,12 @@
 
 All notable changes to homebridge-thermobit will be documented in this file.
 
+## 1.4.0 (2021-11-01)
+
+### Added
+
+- `disableDeviceLogging` configuration option
+
 ## 1.3.0 (2021-11-01)
 
 ### Added
