@@ -2,6 +2,12 @@
 
 All notable changes to homebridge-thermobit will be documented in this file.
 
+## 1.3.0 (2021-11-01)
+
+### Added
+
+- Turning off uses schedule mode, turning on uses manual mode
+
 ## 1.2.0 (2021-11-01)
 
 ### Added
