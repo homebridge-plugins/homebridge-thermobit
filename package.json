@@ -2,7 +2,10 @@
   "name": "homebridge-thermobit",
   "alias": "Thermobit",
   "version": "1.3.0",
-  "author": "bwp91",
+  "author": {
+    "name": "bwp91",
+    "email": "bwp91@icloud.com"
+  },
   "description": "Homebridge plugin to integrate Thermobit devices into HomeKit.",
   "license": "MIT",
   "keywords": [
