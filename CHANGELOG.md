@@ -2,6 +2,13 @@
 
 All notable changes to homebridge-thermobit will be documented in this file.
 
+## 1.5.0 (2021-11-02)
+
+### Added
+
+- Homebridge verified badge on README
+- Credits on README
+
 ## 1.4.0 (2021-11-01)
 
 ### Added
