@@ -41,6 +41,12 @@ Homebridge plugin to integrate Thermobit devices into HomeKit
 - [Changelog](https://github.com/bwp91/homebridge-thermobit/blob/latest/CHANGELOG.md)
 - [About Me](https://github.com/sponsors/bwp91)
 
+### Credits
+
+- To the creator of the awesome plugin header logo: [Keryan Belahcene](https://www.instagram.com/keryan.me).
+- To the creators/contributors of [Fakegato](https://github.com/simont77/fakegato-history): [@simont77](https://github.com/simont77) and [@NorthernMan54](https://github.com/NorthernMan54).
+- To the creators/contributors of [Homebridge](https://homebridge.io) who make this plugin possible.
+
 ### Disclaimer
 
 - I am in no way affiliated with Thermobit and this plugin is a personal project that I maintain in my free time.
