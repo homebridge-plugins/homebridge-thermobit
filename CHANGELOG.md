@@ -2,6 +2,12 @@
 
 All notable changes to homebridge-thermobit will be documented in this file.
 
+## UPCOMING
+
+### Changed
+
+- Recommended Homebridge bumped to v1.3.6
+
 ## 1.5.0 (2021-11-02)
 
 ### Added
