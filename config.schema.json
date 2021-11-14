@@ -47,6 +47,367 @@
         "title": "Disable Plugin",
         "type": "boolean",
         "description": "If true, the plugin will remove all accessories and not load the plugin on restart."
+      },
+      "enableSchedule": {
+        "title": "Enable Schedule",
+        "type": "boolean",
+        "description": "If true, the plugin will update the program schedule with the settings stated below."
+      },
+      "schedule": {
+        "title": "Discovery Settings",
+        "type": "object",
+        "properties": {
+          "satFirstFrom": {
+            "title": "Sat #1 From",
+            "placeholder": "04:00",
+            "type": "string",
+            "condition": {
+              "functionBody": "return (model.enableSchedule);"
+            }
+          },
+          "satFirstUntil": {
+            "title": "Sat #1 Until",
+            "placeholder": "08:30",
+            "type": "string",
+            "condition": {
+              "functionBody": "return (model.enableSchedule);"
+            }
+          },
+          "satFirstTemp": {
+            "title": "Sat #1 Temp",
+            "placeholder": 60,
+            "minimum": 0,
+            "type": "integer",
+            "condition": {
+              "functionBody": "return (model.enableSchedule);"
+            }
+          },
+          "satSecondFrom": {
+            "title": "Sat #2 From",
+            "placeholder": "14:00",
+            "type": "string",
+            "condition": {
+              "functionBody": "return (model.enableSchedule);"
+            }
+          },
+          "satSecondUntil": {
+            "title": "Sat #2 Until",
+            "placeholder": "22:30",
+            "type": "string",
+            "condition": {
+              "functionBody": "return (model.enableSchedule);"
+            }
+          },
+          "satSecondTemp": {
+            "title": "Sat #2 Temp",
+            "placeholder": 60,
+            "minimum": 0,
+            "type": "integer",
+            "condition": {
+              "functionBody": "return (model.enableSchedule);"
+            }
+          },
+          "sunFirstFrom": {
+            "title": "Sun #1 From",
+            "placeholder": "04:00",
+            "type": "string",
+            "condition": {
+              "functionBody": "return (model.enableSchedule);"
+            }
+          },
+          "sunFirstUntil": {
+            "title": "Sun #1 Until",
+            "placeholder": "08:30",
+            "type": "string",
+            "condition": {
+              "functionBody": "return (model.enableSchedule);"
+            }
+          },
+          "sunFirstTemp": {
+            "title": "Sun #1 Temp",
+            "placeholder": 60,
+            "minimum": 0,
+            "type": "integer",
+            "condition": {
+              "functionBody": "return (model.enableSchedule);"
+            }
+          },
+          "sunSecondFrom": {
+            "title": "Sun #2 From",
+            "placeholder": "14:00",
+            "type": "string",
+            "condition": {
+              "functionBody": "return (model.enableSchedule);"
+            }
+          },
+          "sunSecondUntil": {
+            "title": "Sun #2 Until",
+            "placeholder": "22:30",
+            "type": "string",
+            "condition": {
+              "functionBody": "return (model.enableSchedule);"
+            }
+          },
+          "sunSecondTemp": {
+            "title": "Sun #2 Temp",
+            "placeholder": 60,
+            "minimum": 0,
+            "type": "integer",
+            "condition": {
+              "functionBody": "return (model.enableSchedule);"
+            }
+          },
+          "monFirstFrom": {
+            "title": "Mon #1 From",
+            "placeholder": "04:00",
+            "type": "string",
+            "condition": {
+              "functionBody": "return (model.enableSchedule);"
+            }
+          },
+          "monFirstUntil": {
+            "title": "Mon #1 Until",
+            "placeholder": "08:30",
+            "type": "string",
+            "condition": {
+              "functionBody": "return (model.enableSchedule);"
+            }
+          },
+          "monFirstTemp": {
+            "title": "Mon #1 Temp",
+            "placeholder": 60,
+            "minimum": 0,
+            "type": "integer",
+            "condition": {
+              "functionBody": "return (model.enableSchedule);"
+            }
+          },
+          "monSecondFrom": {
+            "title": "Mon #2 From",
+            "placeholder": "14:00",
+            "type": "string",
+            "condition": {
+              "functionBody": "return (model.enableSchedule);"
+            }
+          },
+          "monSecondUntil": {
+            "title": "Mon #2 Until",
+            "placeholder": "22:30",
+            "type": "string",
+            "condition": {
+              "functionBody": "return (model.enableSchedule);"
+            }
+          },
+          "monSecondTemp": {
+            "title": "Mon #2 Temp",
+            "placeholder": 60,
+            "minimum": 0,
+            "type": "integer",
+            "condition": {
+              "functionBody": "return (model.enableSchedule);"
+            }
+          },
+          "tueFirstFrom": {
+            "title": "Tue #1 From",
+            "placeholder": "04:00",
+            "type": "string",
+            "condition": {
+              "functionBody": "return (model.enableSchedule);"
+            }
+          },
+          "tueFirstUntil": {
+            "title": "Tue #1 Until",
+            "placeholder": "08:30",
+            "type": "string",
+            "condition": {
+              "functionBody": "return (model.enableSchedule);"
+            }
+          },
+          "tueFirstTemp": {
+            "title": "Tue #1 Temp",
+            "placeholder": 60,
+            "minimum": 0,
+            "type": "integer",
+            "condition": {
+              "functionBody": "return (model.enableSchedule);"
+            }
+          },
+          "tueSecondFrom": {
+            "title": "Tue #2 From",
+            "placeholder": "14:00",
+            "type": "string",
+            "condition": {
+              "functionBody": "return (model.enableSchedule);"
+            }
+          },
+          "tueSecondUntil": {
+            "title": "Tue #2 Until",
+            "placeholder": "22:30",
+            "type": "string",
+            "condition": {
+              "functionBody": "return (model.enableSchedule);"
+            }
+          },
+          "tueSecondTemp": {
+            "title": "Tue #2 Temp",
+            "placeholder": 60,
+            "minimum": 0,
+            "type": "integer",
+            "condition": {
+              "functionBody": "return (model.enableSchedule);"
+            }
+          },
+          "wedFirstFrom": {
+            "title": "Wed #1 From",
+            "placeholder": "04:00",
+            "type": "string",
+            "condition": {
+              "functionBody": "return (model.enableSchedule);"
+            }
+          },
+          "wedFirstUntil": {
+            "title": "Wed #1 Until",
+            "placeholder": "08:30",
+            "type": "string",
+            "condition": {
+              "functionBody": "return (model.enableSchedule);"
+            }
+          },
+          "wedFirstTemp": {
+            "title": "Wed #1 Temp",
+            "placeholder": 60,
+            "minimum": 0,
+            "type": "integer",
+            "condition": {
+              "functionBody": "return (model.enableSchedule);"
+            }
+          },
+          "wedSecondFrom": {
+            "title": "Wed #2 From",
+            "placeholder": "14:00",
+            "type": "string",
+            "condition": {
+              "functionBody": "return (model.enableSchedule);"
+            }
+          },
+          "wedSecondUntil": {
+            "title": "Wed #2 Until",
+            "placeholder": "22:30",
+            "type": "string",
+            "condition": {
+              "functionBody": "return (model.enableSchedule);"
+            }
+          },
+          "wedSecondTemp": {
+            "title": "Wed #2 Temp",
+            "placeholder": 60,
+            "minimum": 0,
+            "type": "integer",
+            "condition": {
+              "functionBody": "return (model.enableSchedule);"
+            }
+          },
+          "thrFirstFrom": {
+            "title": "Thr #1 From",
+            "placeholder": "04:00",
+            "type": "string",
+            "condition": {
+              "functionBody": "return (model.enableSchedule);"
+            }
+          },
+          "thrFirstUntil": {
+            "title": "Thr #1 Until",
+            "placeholder": "08:30",
+            "type": "string",
+            "condition": {
+              "functionBody": "return (model.enableSchedule);"
+            }
+          },
+          "thrFirstTemp": {
+            "title": "Thr #1 Temp",
+            "placeholder": 60,
+            "minimum": 0,
+            "type": "integer",
+            "condition": {
+              "functionBody": "return (model.enableSchedule);"
+            }
+          },
+          "thrSecondFrom": {
+            "title": "Thr #2 From",
+            "placeholder": "14:00",
+            "type": "string",
+            "condition": {
+              "functionBody": "return (model.enableSchedule);"
+            }
+          },
+          "thrSecondUntil": {
+            "title": "Thr #2 Until",
+            "placeholder": "22:30",
+            "type": "string",
+            "condition": {
+              "functionBody": "return (model.enableSchedule);"
+            }
+          },
+          "thrSecondTemp": {
+            "title": "Thr #2 Temp",
+            "placeholder": 60,
+            "minimum": 0,
+            "type": "integer",
+            "condition": {
+              "functionBody": "return (model.enableSchedule);"
+            }
+          },
+          "friFirstFrom": {
+            "title": "Fri #1 From",
+            "placeholder": "04:00",
+            "type": "string",
+            "condition": {
+              "functionBody": "return (model.enableSchedule);"
+            }
+          },
+          "friFirstUntil": {
+            "title": "Fri #1 Until",
+            "placeholder": "08:30",
+            "type": "string",
+            "condition": {
+              "functionBody": "return (model.enableSchedule);"
+            }
+          },
+          "friFirstTemp": {
+            "title": "Fri #1 Temp",
+            "placeholder": 60,
+            "minimum": 0,
+            "type": "integer",
+            "condition": {
+              "functionBody": "return (model.enableSchedule);"
+            }
+          },
+          "friSecondFrom": {
+            "title": "Fri #2 From",
+            "placeholder": "14:00",
+            "type": "string",
+            "condition": {
+              "functionBody": "return (model.enableSchedule);"
+            }
+          },
+          "friSecondUntil": {
+            "title": "Fri #2 Until",
+            "placeholder": "22:30",
+            "type": "string",
+            "condition": {
+              "functionBody": "return (model.enableSchedule);"
+            }
+          },
+          "friSecondTemp": {
+            "title": "Fri #2 Temp",
+            "placeholder": 60,
+            "minimum": 0,
+            "type": "integer",
+            "condition": {
+              "functionBody": "return (model.enableSchedule);"
+            }
+          }
+        }
       }
     }
   },
@@ -62,6 +423,85 @@
       "description": "Optional settings for the plugin, including refreshing and global logging settings.",
       "expandable": true,
       "items": ["refreshTime", "disableDeviceLogging", "debug", "disablePlugin"]
+    },
+    {
+      "type": "fieldset",
+      "title": "Program Schedule",
+      "description": "Optionally define the program schedule for your Thermobit device.",
+      "expandable": true,
+      "items": [
+        "enableSchedule",
+        {
+          "type": "flex",
+          "flex-flow": "row wrap",
+          "items": ["schedule.satFirstFrom", "schedule.satFirstUntil", "schedule.satFirstTemp"]
+        },
+        {
+          "type": "flex",
+          "flex-flow": "row wrap",
+          "items": ["schedule.satSecondFrom", "schedule.satSecondUntil", "schedule.satSecondTemp"]
+        },
+        {
+          "type": "flex",
+          "flex-flow": "row wrap",
+          "items": ["schedule.sunFirstFrom", "schedule.sunFirstUntil", "schedule.sunFirstTemp"]
+        },
+        {
+          "type": "flex",
+          "flex-flow": "row wrap",
+          "items": ["schedule.sunSecondFrom", "schedule.sunSecondUntil", "schedule.sunSecondTemp"]
+        },
+        {
+          "type": "flex",
+          "flex-flow": "row wrap",
+          "items": ["schedule.monFirstFrom", "schedule.monFirstUntil", "schedule.monFirstTemp"]
+        },
+        {
+          "type": "flex",
+          "flex-flow": "row wrap",
+          "items": ["schedule.monSecondFrom", "schedule.monSecondUntil", "schedule.monSecondTemp"]
+        },
+        {
+          "type": "flex",
+          "flex-flow": "row wrap",
+          "items": ["schedule.tueFirstFrom", "schedule.tueFirstUntil", "schedule.tueFirstTemp"]
+        },
+        {
+          "type": "flex",
+          "flex-flow": "row wrap",
+          "items": ["schedule.tueSecondFrom", "schedule.tueSecondUntil", "schedule.tueSecondTemp"]
+        },
+        {
+          "type": "flex",
+          "flex-flow": "row wrap",
+          "items": ["schedule.wedFirstFrom", "schedule.wedFirstUntil", "schedule.wedFirstTemp"]
+        },
+        {
+          "type": "flex",
+          "flex-flow": "row wrap",
+          "items": ["schedule.wedSecondFrom", "schedule.wedSecondUntil", "schedule.wedSecondTemp"]
+        },
+        {
+          "type": "flex",
+          "flex-flow": "row wrap",
+          "items": ["schedule.thrFirstFrom", "schedule.thrFirstUntil", "schedule.thrFirstTemp"]
+        },
+        {
+          "type": "flex",
+          "flex-flow": "row wrap",
+          "items": ["schedule.thrSecondFrom", "schedule.thrSecondUntil", "schedule.thrSecondTemp"]
+        },
+        {
+          "type": "flex",
+          "flex-flow": "row wrap",
+          "items": ["schedule.friFirstFrom", "schedule.friFirstUntil", "schedule.friFirstTemp"]
+        },
+        {
+          "type": "flex",
+          "flex-flow": "row wrap",
+          "items": ["schedule.friSecondFrom", "schedule.friSecondUntil", "schedule.friSecondTemp"]
+        }
+      ]
     }
   ]
 }
