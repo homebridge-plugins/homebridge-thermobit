@@ -76,7 +76,7 @@
           "satFirstTemp": {
             "title": "Sat #1 Temp",
             "placeholder": 60,
-            "minimum": 0,
+            "minimum": 30,
             "type": "integer",
             "condition": {
               "functionBody": "return (model.enableSchedule);"
@@ -101,7 +101,7 @@
           "satSecondTemp": {
             "title": "Sat #2 Temp",
             "placeholder": 60,
-            "minimum": 0,
+            "minimum": 30,
             "type": "integer",
             "condition": {
               "functionBody": "return (model.enableSchedule);"
@@ -126,7 +126,7 @@
           "sunFirstTemp": {
             "title": "Sun #1 Temp",
             "placeholder": 60,
-            "minimum": 0,
+            "minimum": 30,
             "type": "integer",
             "condition": {
               "functionBody": "return (model.enableSchedule);"
@@ -151,7 +151,7 @@
           "sunSecondTemp": {
             "title": "Sun #2 Temp",
             "placeholder": 60,
-            "minimum": 0,
+            "minimum": 30,
             "type": "integer",
             "condition": {
               "functionBody": "return (model.enableSchedule);"
@@ -176,7 +176,7 @@
           "monFirstTemp": {
             "title": "Mon #1 Temp",
             "placeholder": 60,
-            "minimum": 0,
+            "minimum": 30,
             "type": "integer",
             "condition": {
               "functionBody": "return (model.enableSchedule);"
@@ -201,7 +201,7 @@
           "monSecondTemp": {
             "title": "Mon #2 Temp",
             "placeholder": 60,
-            "minimum": 0,
+            "minimum": 30,
             "type": "integer",
             "condition": {
               "functionBody": "return (model.enableSchedule);"
@@ -226,7 +226,7 @@
           "tueFirstTemp": {
             "title": "Tue #1 Temp",
             "placeholder": 60,
-            "minimum": 0,
+            "minimum": 30,
             "type": "integer",
             "condition": {
               "functionBody": "return (model.enableSchedule);"
@@ -251,7 +251,7 @@
           "tueSecondTemp": {
             "title": "Tue #2 Temp",
             "placeholder": 60,
-            "minimum": 0,
+            "minimum": 30,
             "type": "integer",
             "condition": {
               "functionBody": "return (model.enableSchedule);"
@@ -276,7 +276,7 @@
           "wedFirstTemp": {
             "title": "Wed #1 Temp",
             "placeholder": 60,
-            "minimum": 0,
+            "minimum": 30,
             "type": "integer",
             "condition": {
               "functionBody": "return (model.enableSchedule);"
@@ -301,7 +301,7 @@
           "wedSecondTemp": {
             "title": "Wed #2 Temp",
             "placeholder": 60,
-            "minimum": 0,
+            "minimum": 30,
             "type": "integer",
             "condition": {
               "functionBody": "return (model.enableSchedule);"
@@ -326,7 +326,7 @@
           "thrFirstTemp": {
             "title": "Thr #1 Temp",
             "placeholder": 60,
-            "minimum": 0,
+            "minimum": 30,
             "type": "integer",
             "condition": {
               "functionBody": "return (model.enableSchedule);"
@@ -351,7 +351,7 @@
           "thrSecondTemp": {
             "title": "Thr #2 Temp",
             "placeholder": 60,
-            "minimum": 0,
+            "minimum": 30,
             "type": "integer",
             "condition": {
               "functionBody": "return (model.enableSchedule);"
@@ -376,7 +376,7 @@
           "friFirstTemp": {
             "title": "Fri #1 Temp",
             "placeholder": 60,
-            "minimum": 0,
+            "minimum": 30,
             "type": "integer",
             "condition": {
               "functionBody": "return (model.enableSchedule);"
@@ -401,7 +401,7 @@
           "friSecondTemp": {
             "title": "Fri #2 Temp",
             "placeholder": 60,
-            "minimum": 0,
+            "minimum": 30,
             "type": "integer",
             "condition": {
               "functionBody": "return (model.enableSchedule);"
