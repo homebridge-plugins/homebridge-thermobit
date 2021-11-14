@@ -4,6 +4,11 @@ All notable changes to homebridge-thermobit will be documented in this file.
 
 ## UPCOMING
 
+### Added
+
+- Configure the program schedule from within the plugin configuration
+- Accessories will show 'No Response' until plugin has successfully initialised
+
 ### Changed
 
 - Recommended Homebridge bumped to v1.3.6
