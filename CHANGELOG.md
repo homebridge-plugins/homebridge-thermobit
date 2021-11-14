@@ -11,6 +11,7 @@ All notable changes to homebridge-thermobit will be documented in this file.
 
 ### Changed
 
+- Plugin will disable on any initial HTTP error that cannot be rectified
 - Recommended Homebridge bumped to v1.3.6
 
 ## 1.5.0 (2021-11-02)
