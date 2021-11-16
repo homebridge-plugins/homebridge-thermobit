@@ -2,6 +2,12 @@
 
 All notable changes to homebridge-thermobit will be documented in this file.
 
+## 1.6.1 (2021-11-16)
+
+### Fixed
+
+- A 'No Response' issue
+
 ## 1.6.0 (2021-11-14)
 
 ### Added
