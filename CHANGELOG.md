@@ -2,6 +2,12 @@
 
 All notable changes to homebridge-thermobit will be documented in this file.
 
+## 1.6.2 (2021-11-16)
+
+### Fixed
+
+- An issue setting times for the second schedule for each day
+
 ## 1.6.1 (2021-11-16)
 
 ### Fixed
