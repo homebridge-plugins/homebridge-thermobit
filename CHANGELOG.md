@@ -2,7 +2,7 @@
 
 All notable changes to homebridge-thermobit will be documented in this file.
 
-## UPCOMING
+## 1.6.3 (2021-12-08)
 
 ### Changed
 
