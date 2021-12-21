@@ -21,6 +21,24 @@
         "type": "string",
         "title": "Thermobit Password"
       },
+      "debug": {
+        "title": "Debug Logging",
+        "type": "boolean"
+      },
+      "debugFakegato": {
+        "title": "Debug Fakegato",
+        "type": "boolean"
+      },
+      "disablePlugin": {
+        "title": "Disable Plugin",
+        "type": "boolean",
+        "description": "If true, the plugin will remove all accessories and not load the plugin on restart."
+      },
+      "disableDeviceLogging": {
+        "type": "boolean",
+        "title": "Disable Device Logging",
+        "description": "Global logging setting for accessory status changes. If true then accessory status changes will not be logged. This can also be set per accessory later in the config."
+      },
       "refreshTime": {
         "title": "Refresh Interval",
         "type": "integer",
@@ -28,33 +46,13 @@
         "placeholder": 15,
         "minimum": 15
       },
-      "disableDeviceLogging": {
-        "type": "boolean",
-        "title": "Disable Device Logging",
-        "description": "Global logging setting for accessory status changes. If true then accessory status changes will not be logged. This can also be set per accessory later in the config."
-      },
-      "debug": {
-        "title": "Debug Logging",
-        "type": "boolean",
-        "description": "Global logging setting for the plugin. If true then debug information will be added to the log. This can also be set per accessory later in the config."
-      },
-      "debugFakegato": {
-        "title": "Debug Fakegato",
-        "type": "boolean",
-        "description": "If true, the included Fakegato library will debug to the log."
-      },
-      "disablePlugin": {
-        "title": "Disable Plugin",
-        "type": "boolean",
-        "description": "If true, the plugin will remove all accessories and not load the plugin on restart."
-      },
       "enableSchedule": {
         "title": "Enable Schedule",
         "type": "boolean",
         "description": "If true, the plugin will update the program schedule with the settings stated below."
       },
       "schedule": {
-        "title": "Discovery Settings",
+        "title": "Program Schedule",
         "type": "object",
         "properties": {
           "satFirstFrom": {
@@ -415,14 +413,14 @@
     {
       "type": "fieldset",
       "title": "Required Settings",
-      "items": ["username", "password"]
+      "items": ["username", "password", "debug", "disablePlugin"]
     },
     {
       "type": "fieldset",
-      "title": "Optional Settings",
-      "description": "Optional settings for the plugin, including refreshing and global logging settings.",
+      "title": "Advanced Settings",
+      "description": "Advanced settings for the plugin, including refresh options.",
       "expandable": true,
-      "items": ["refreshTime", "disableDeviceLogging", "debug", "disablePlugin"]
+      "items": ["disableDeviceLogging", "refreshTime"]
     },
     {
       "type": "fieldset",

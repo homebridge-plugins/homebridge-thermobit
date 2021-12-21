@@ -2,6 +2,12 @@
 
 All notable changes to homebridge-thermobit will be documented in this file.
 
+## 1.6.4 (2021-12-21)
+
+### Changed
+
+- Some config options rearranged for easier access
+
 ## 1.6.3 (2021-12-08)
 
 ### Changed
