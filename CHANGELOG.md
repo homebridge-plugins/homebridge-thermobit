@@ -2,6 +2,12 @@
 
 All notable changes to homebridge-thermobit will be documented in this file.
 
+## BETA
+
+### Changed
+
+- Bump `homebridge` recommended version to v1.3.9
+
 ## 1.6.4 (2021-12-21)
 
 ### Changed
