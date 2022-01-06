@@ -2,6 +2,12 @@
 
 All notable changes to homebridge-thermobit will be documented in this file.
 
+## BETA
+
+### Fixed
+
+- Plugin crash for older versions of Homebridge
+
 ## 1.6.5 (2022-01-03)
 
 ### Changed
