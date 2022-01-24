@@ -2,7 +2,7 @@
 
 All notable changes to homebridge-thermobit will be documented in this file.
 
-## 1.6.6 (2022-01-24)
+## 1.6.7 (2022-01-24)
 
 ### Changed
 
