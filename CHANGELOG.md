@@ -2,6 +2,13 @@
 
 All notable changes to homebridge-thermobit will be documented in this file.
 
+## 1.6.9 (2022-04-03)
+
+### Changed
+
+- Bump `axios` to v0.26.1
+- Updated dependencies
+
 ## 1.6.8 (2022-02-27)
 
 ### Changed

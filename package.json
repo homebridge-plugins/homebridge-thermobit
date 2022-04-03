@@ -50,7 +50,7 @@
   ],
   "dependencies": {
     "@homebridge/plugin-ui-utils": "^0.0.19",
-    "axios": "^0.26.0"
+    "axios": "^0.26.1"
   },
   "prettier": {
     "printWidth": 100
