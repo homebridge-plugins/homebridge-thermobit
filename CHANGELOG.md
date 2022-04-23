@@ -2,6 +2,17 @@
 
 All notable changes to homebridge-thermobit will be documented in this file.
 
+## BETA
+
+### Potentially Breaking Changes
+
+⚠️ The minimum required version of Homebridge is now v1.4.0
+⚠️ The minimum required version of Node is now v14
+
+### Changed
+
+- Changed to ESM package
+
 ## 1.6.9 (2022-04-03)
 
 ### Changed
