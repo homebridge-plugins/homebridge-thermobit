@@ -6,6 +6,7 @@ All notable changes to homebridge-thermobit will be documented in this file.
 
 ### Changed
 
+- Bump `node` recommended versions to v14.20.0 or v16.16.0
 - Updated dependencies
 
 ## 2.0.4 (2022-06-21)
