@@ -2,6 +2,13 @@
 
 All notable changes to homebridge-thermobit will be documented in this file.
 
+## 2.0.7 (2022-09-25)
+
+### Changed
+
+- Correct parameters for `updatePlatformAccessories()`
+- Bump `node` recommended versions to v14.20.1 or v16.17.1
+
 ## 2.0.6 (2022-08-23)
 
 ### Changed
