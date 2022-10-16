@@ -2,6 +2,13 @@
 
 All notable changes to homebridge-thermobit will be documented in this file.
 
+## 2.0.8 (2022-10-16)
+
+### Changed
+
+- Bump `node` recommended versions to v14.20.1 or v16.18.0 or v18.11.0
+- Bump `axios` to v1.1.3
+
 ## 2.0.7 (2022-09-25)
 
 ### Changed
