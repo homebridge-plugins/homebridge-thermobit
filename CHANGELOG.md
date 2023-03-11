@@ -2,7 +2,7 @@
 
 All notable changes to homebridge-thermobit will be documented in this file.
 
-## BETA
+## 3.0.0 (2023-03-11)
 
 ### Breaking
 
